@@ -13,9 +13,31 @@ button2.onclick = function gerenate() {
 };
 
 function verificar() {
-  let n1 = Number(document.querySelector("#ranNum1").innerHTML);
-  let n2 = Number(document.querySelector("#ranNum2").innerHTML);
+  let n1 = +document.querySelector("#ranNum1").innerHTML;
+  let n2 = +document.querySelector("#ranNum2").innerHTML;
 
-  let resultado = n1 * n2;
-  document.querySelector(".resultado").innerHTML = resultado;
+  if (!n1 || !n2) return alert("É obrigatório gerar os 2 números");
+
+  let resultado = parseInt(n1) * parseInt(n2);
+
+  return resultado;
+}
+
+function capturar() {
+  const resultado = verificar();
+  const capt = +document.querySelector("#resposta").value;
+  const valorDigitado = document.querySelector(".valorDigitado");
+
+  // aqui verifica se os numeros foram gerados, se nao foram, ocorre esse alert
+  if (!resultado) return;
+
+  // aqui verifica se o usario digitou uma resposta, se nao digitou, nao continua
+  if (!capt) return alert("Digite uma resposta");
+
+  if (capt === resultado) {
+    valorDigitado.innerHTML += `<p>Parabéns! Você acertou!</p>`;
+  } else {
+    valorDigitado.innerHTML += `<p>Errado! Tente novamente</p>`;
+    valorDigitado.innerHTML += `Valor correto: ${resultado}`;
+  }
 }
